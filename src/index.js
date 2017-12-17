@@ -17,5 +17,11 @@ const songList = tracks.map((list, i) =>
 
 const album =  <ol>{songList}</ol>
 
+class Artist extends React.Component {
+  render() {
+    return album;
+  }
+}
 
-render(album, document.getElementById('root'));
+
+render(<Artist/>, document.getElementById('root'));
