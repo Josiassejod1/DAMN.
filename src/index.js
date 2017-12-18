@@ -14,6 +14,11 @@ const listStyle = {
   'list-style':'none'
 }
 
+const color = {
+  'background':'white'
+}
+
+
 var tracks = ['BLOOD.', 
           'DNA.',
           'YAH.',
@@ -29,10 +34,10 @@ var tracks = ['BLOOD.',
 
 //This keeps track of the list order
 const songList = tracks.map((list, i) =>
-    <li style= {listStyle}
-    key={"track_" + i}>{list}</li>);
+    <li className="list" style= {listStyle}
+    key={"track_" + i} id={i + 1}>{list}</li>);
 
-const album =  <ul>{songList}</ul>
+  
 
 //Kendrick 
 var kendrick = {
@@ -56,19 +61,20 @@ class Cover extends React.Component {
 
 
 class Artist extends React.Component {
+  track (e){
+    alert('This is Track ' + e.target.id);
+  }
   render() {
-    return album;
+    return <ul onClick={this.track}>{songList}</ul>
   }
 }
 
 class Album extends React.Component {
   render() {
     return (
-
-
     <div>
       <Cover/>
-      <Artist/>
+      <Artist />
     </div>
     );
   }
