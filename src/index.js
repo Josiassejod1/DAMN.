@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Helmet from 'react-helmet';
+import Sidebar from 'react-sidebar';
+
 
 
 const coverStyle = {
@@ -9,13 +11,14 @@ const coverStyle = {
 };
 
 const listStyle = {
-  'text-align':'center',
+  textAlign:'center',
   'list-style':'none'
 }
 
 const color = {
   'background':'white'
 }
+
 
 
 var tracks = ['BLOOD.', 
@@ -32,12 +35,6 @@ var tracks = ['BLOOD.',
           'DUCKWORTH.'];
 
 //This keeps track of the list order
-const songList = tracks.map((list, i) =>
-    <li className="list" style= {listStyle}
-    key={"track_" + i}>
-<span className="back" id={i + 1}>{list}
-      </span>
-    </li>);
 
   
 
@@ -67,24 +64,44 @@ class Artist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
+      hover: 0
     }
   }
 
+  onMouseEnter(e){
+      this.setState({
+        hover: this.state.hover + 1
+      });
+  }
+
   onClick(e) {
+    if (e.target.id != "") {
     this.setState({
       count: this.state.count + 1
     });
 
-    alert('You are playing Track ' + e.target.id);
+    alert('You are playing Track ' + e.target.id + ': ' + e.target.textContent);
+    }
   }
+ 
 
   render() {
+    const songList = tracks.map((list, i) =>
+      <li className="list" style={listStyle}
+        key={"track_" + i}>
+        <span className="back" id={i + 1} 
+        onMouseEnter={this.onMouseEnter.bind(this)}>
+          {list}
+        </span>
+      </li>);
+
     return (<div>
       <ul onClick={this.onClick.bind(this)}>
               {songList}
             </ul>
-            <p style={coverStyle}>Track Listens: {this.state.count}</p>
+            <p style={coverStyle}>Plays: {this.state.count}</p>
+            <p style={coverStyle}>Visits: {this.state.hover}</p>
             </div>
     )
   }
@@ -101,6 +118,10 @@ class Album extends React.Component {
     );
   }
 }
+
+
+
+
 
 
 render(<Album/>, document.getElementById('root'));
