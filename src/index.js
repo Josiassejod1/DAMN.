@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import Helmet from 'react-helmet';
 
 
-
 const coverStyle = {
   display: 'block',
   margin: 'auto'
@@ -35,7 +34,10 @@ var tracks = ['BLOOD.',
 //This keeps track of the list order
 const songList = tracks.map((list, i) =>
     <li className="list" style= {listStyle}
-    key={"track_" + i} id={i + 1}>{list}</li>);
+    key={"track_" + i}>
+<span className="back" id={i + 1}>{list}
+      </span>
+    </li>);
 
   
 
