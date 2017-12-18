@@ -63,15 +63,35 @@ class Cover extends React.Component {
 
 
 class Artist extends React.Component {
-  track (e){
-    alert('This is Track ' + e.target.id);
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    }
   }
+
+  onClick(e) {
+    this.setState({
+      count: this.state.count + 1
+    });
+
+    alert('You are playing Track ' + e.target.id);
+  }
+
   render() {
-    return <ul onClick={this.track}>{songList}</ul>
+    return (<div>
+      <ul onClick={this.onClick.bind(this)}>
+              {songList}
+            </ul>
+            <p style={coverStyle}>Track Listens: {this.state.count}</p>
+            </div>
+    )
   }
 }
 
 class Album extends React.Component {
+  
   render() {
     return (
     <div>
